@@ -12,5 +12,14 @@ var ATTRIBUTE_TYPES = module.exports = {
     SourceFile: "SourceFile",
     LineNumberTable: "LineNumberTable",
     LocalVariableTable: "LocalVariableTable",
+    MethodParameters: "MethodParameters",
+    Signature: "Signature",
+    BootstrapMethods: "BootstrapMethods",
+    RuntimeVisibleAnnotations: "RuntimeVisibleAnnotations",
+    RuntimeInvisibleAnnotations: "RuntimeInvisibleAnnotations",
+    RuntimeVisibleParameterAnnotations: "RuntimeVisibleParameterAnnotations",
+    RuntimeInvisibleParameterAnnotations: "RuntimeInvisibleParameterAnnotations",
+    EnclosingMethod: "EnclosingMethod",
+    AnnotationDefault: "AnnotationDefault",
     Deprecated: "Deprecated"
 };

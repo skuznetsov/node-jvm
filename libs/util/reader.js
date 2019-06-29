@@ -30,6 +30,12 @@ Reader.prototype.read32 = function() {
     return data;
 }
 
+Reader.prototype.readFloat = function() {
+    var data = this.bytes.readFloatBE(this.offset);
+    this.offset += 4;
+    return data;
+}
+
 Reader.prototype.readString = function(length) {
     var data = this.bytes.toString(undefined, this.offset, this.offset + length)
     this.offset += length;

@@ -17,6 +17,9 @@ var TAGS = module.exports = {
     CONSTANT_NameAndType: 12,
     CONSTANT_Utf8: 1,
     CONSTANT_Unicode: 2,
+    CONSTANT_MethodHandle: 15,
+    CONSTANT_MethodType: 16,
+    CONSTANT_InvokeDynamic: 18,
     toString: function(tag) {
         for(var name in this) {
             if (this[name] === tag) {

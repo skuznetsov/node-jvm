@@ -40,6 +40,10 @@ var JVM = module.exports = function() {
 
 util.inherits(JVM, EE);
 
+JVM.prototype.addClasspath = function (path) {
+    CLASSES.addPath(path);
+}
+
 JVM.prototype.setEntryPointClassName = function(className) {
     this.entryPoint.className = className;
 }
@@ -61,7 +65,7 @@ JVM.prototype.loadClassFiles = function(dirName) {
     CLASSES.addPath(dirName);
     var files = fs.readdirSync(dirName);
     files.forEach(function(file) {
-        var p = util.format("%s/%s", dirName, file);
+        var p = path.normalize(`${dirName}/${file}`);
         var stat = fs.statSync(p);
         if (stat.isFile()) {
             if (path.extname(file) === ".class") {

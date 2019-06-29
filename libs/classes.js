@@ -49,6 +49,38 @@ Classes.prototype.loadClassBytes = function(bytes) {
     return classArea;
 }
 
+Classes.prototype.findPathInternal = function(prependedPath, appendedPath) {
+    prependedPath = path.normalize(prependedPath);
+    appendedPath = path.normalize(appendedPath);
+
+    let ppData = prependedPath.split(path.sep);
+    let result = '';
+    for (let ppIdx = ppData.length - 1; ppIdx > 0; ppIdx--) {
+        result = ppData.join(path.sep) + path.sep + appendedPath;
+        if (fs.existsSync(result)) {
+            return result;
+        }
+        ppData.pop();
+    }
+    return null;
+}
+
+Classes.prototype.findPath = function(prependedPath, appendedPath) {
+    let filepath = null;
+
+    for(let idx = 0; idx < this.paths.length; idx++) {
+        classpath = this.paths[idx];
+        filepath = path.normalize(classpath) + path.sep + path.normalize(appendedPath);
+        if (fs.existsSync(filepath)) {
+            return filepath;
+        }
+    }
+
+    filepath = this.findPathInternal(prependedPath, appendedPath);
+
+    return filepath;
+}
+
 Classes.prototype.loadClassFile = function(fileName) {
     LOG.debug("loading " + fileName + " ...");
     var bytes = fs.readFileSync(fileName);
@@ -56,7 +88,7 @@ Classes.prototype.loadClassFile = function(fileName) {
     var classes = ca.getClasses();
     for (var i=0; i<classes.length; i++) {
         if (!this.classes[classes[i]]) {
-            this.loadClassFile(path.dirname(fileName) + path.sep + classes[i] + ".class");
+            this.getClass(classes[i], true);
         }
     }
     return ca;
@@ -100,8 +132,8 @@ Classes.prototype.loadJarFile = function(fileName) {
                 }                
             }
         }
-        return mainClass;
     });    
+    return mainClass;
 }
 
 Classes.prototype.getEntryPoint = function(className, methodName) {
@@ -127,7 +159,7 @@ Classes.prototype.getEntryPoint = function(className, methodName) {
     }    
 }
 
-Classes.prototype.getClass = function(className) {
+Classes.prototype.getClass = function(className, doNotThrow) {
     var ca = this.classes[className];
     if (ca) {
         return ca;
@@ -141,7 +173,9 @@ Classes.prototype.getClass = function(className) {
             return this.loadClassFile(fileName + ".class");
         }
     }
-    throw new Error(util.format("Implementation of the %s class is not found.", className));
+
+    if (!doNotThrow)
+        throw new Error(util.format("Implementation of the %s class is not found.", className));
 };
 
 Classes.prototype.getStaticField = function(className, fieldName) {

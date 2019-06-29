@@ -1,7 +1,7 @@
 {
-  "name": "node-jvm",
-  "version": "0.2.3",
-  "description": "jvm",
+  "name": "jvm-class-reader",
+  "version": "0.3.1",
+  "description": "jvm v4 to v12 class reader with partial class execution",
   "main": "index.js",
   "directories": {
     "example": "examples"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YaroslavGaponov/node-jvm.git"
+    "url": "https://github.com/skuznetsov/node-jvm.git"
   },
   "keywords": [
     "jvm",
@@ -23,18 +23,18 @@
     "adm-zip": "0.4.3"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-mocha-test": "~0.7.0",
     "chai": "~1.8.0",
+    "grunt": "^1.0.3",
+    "grunt-mocha-test": "^0.13.3",
+    "grunt-node-webkit-builder": "~0.1.11",
     "sinon": "~1.7.3",
-    "sinon-chai": "~2.4.0",
-    "grunt-node-webkit-builder": "~0.1.11"
-},
-  "author": "Yaroslav Gaponov",
+    "sinon-chai": "~2.4.0"
+  },
+  "author": "Yaroslav Gaponov with help from Sergey Kuznetsov",
   "license": "MIT",
   "readmeFilename": "readme.md",
   "gitHead": "83c5cb707556be23a180c7bd62c6f20ad65b979a",
   "bugs": {
-    "url": "https://github.com/YaroslavGaponov/node-jvm/issues"
+    "url": "https://github.com/skuznetsov/node-jvm/issues"
   }
 }
